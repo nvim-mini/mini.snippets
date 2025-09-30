@@ -346,6 +346,9 @@
 ---   example from |MiniSnippets-examples|.
 --- - Prefer `*.json` files with dict-like content if you want more cross platfrom
 ---   setup. Otherwise use `*.lua` files with array-like content.
+--- - To implement "dynamic snippet" that changes data (usually <body>) depending
+---   on the context, use `*.lua` file with function returning snippet data.
+---   It should be an element in the output table (dict or array like).
 ---
 --- Notes:
 --- - There is no built-in support for VSCode-like "package.json" files. Define
@@ -376,7 +379,6 @@
 --- - Set up 'mini.snippets' as recommended in |MiniSnippets-examples|.
 --- - Open Neovim. Type each snippet prefix and press <C-j> (even if there is
 ---   still active session). Explore from there.
----
 ---@tag MiniSnippets-overview
 
 --- # Basic snippet management config ~
@@ -1657,7 +1659,7 @@ H.file_readers.lua = function(path, silent)
   local ok, contents = pcall(dofile, path)
   if not ok then return { problems = { 'Could not execute Lua file' } } end
   if type(contents) ~= 'table' then return { problems = { 'Returned object is not a table' } } end
-  return H.read_snippet_dict(contents)
+  return H.read_snippet_data(contents)
 end
 
 H.file_readers.json = function(path, silent)
@@ -1672,17 +1674,20 @@ H.file_readers.json = function(path, silent)
     return { problems = { 'File does not contain a valid JSON object. Reason: ' .. msg } }
   end
 
-  return H.read_snippet_dict(contents)
+  return H.read_snippet_data(contents)
 end
 
 H.file_readers['code-snippets'] = H.file_readers.json
 
-H.read_snippet_dict = function(contents)
+H.read_snippet_data = function(contents)
   local res, problems = {}, {}
   for name, t in pairs(contents) do
     if H.is_snippet(t) then
       -- Try inferring description from dict's field (if appropriate)
       if type(name) == 'string' and (t.desc == nil and t.description == nil) then t.desc = name end
+      table.insert(res, t)
+    elseif vim.is_callable(t) then
+      -- Allow entries to be functions (relevant for Lua files)
       table.insert(res, t)
     else
       table.insert(problems, 'The following is not a valid snippet data:\n' .. vim.inspect(t))

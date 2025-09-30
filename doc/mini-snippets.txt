@@ -349,6 +349,9 @@ General advice:
   example from |MiniSnippets-examples|.
 - Prefer `*.json` files with dict-like content if you want more cross platfrom
   setup. Otherwise use `*.lua` files with array-like content.
+- To implement "dynamic snippet" that changes data (usually <body>) depending
+  on the context, use `*.lua` file with function returning snippet data.
+  It should be an element in the output table (dict or array like).
 
 Notes:
 - There is no built-in support for VSCode-like "package.json" files. Define
