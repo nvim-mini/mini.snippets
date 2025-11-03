@@ -9,15 +9,17 @@ See more details in [Features](#features) and [Documentation](doc/mini-snippets.
 > [!NOTE]
 > This was previously hosted at a personal `echasnovski` GitHub account. It was transferred to a dedicated organization to improve long term project stability. See more details [here](https://github.com/nvim-mini/mini.nvim/discussions/1970).
 
-⦿ This is a part of [mini.nvim](https://github.com/nvim-mini/mini.nvim) library. Please use [this link](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-snippets.md) if you want to mention this module.
+⦿ This is a part of [mini.nvim](https://nvim-mini.org/mini.nvim) library. Please use [this link](https://nvim-mini.org/mini.nvim/readmes/mini-snippets) if you want to mention this module.
 
 ⦿ All contributions (issues, pull requests, discussions, etc.) are done inside of 'mini.nvim'.
 
-⦿ See the repository page to learn about common design principles and configuration recipes.
+⦿ See [whole library documentation](https://nvim-mini.org/mini.nvim/doc/mini-nvim) to learn about general design principles, disable/configuration recipes, and more.
+
+⦿ See [MiniMax](https://nvim-mini.org/MiniMax) for a full config example that uses this module.
 
 ---
 
-If you want to help this project grow but don't know where to start, check out [contributing guides of 'mini.nvim'](https://github.com/nvim-mini/mini.nvim/blob/main/CONTRIBUTING.md) or leave a Github star for 'mini.nvim' project and/or any its standalone Git repositories.
+If you want to help this project grow but don't know where to start, check out [contributing guides of 'mini.nvim'](https://nvim-mini.org/mini.nvim/CONTRIBUTING) or leave a Github star for 'mini.nvim' project and/or any its standalone Git repositories.
 
 ## Demo
 
@@ -34,7 +36,7 @@ https://github.com/user-attachments/assets/2cb38960-a26c-48ae-83cd-5fbcaa57d1cf
 
 - Select from several matched snippets via `vim.ui.select()`. See `:h MiniSnippets.default_select()`.
 
-- Start specialized in-process LSP server to show loaded snippets inside (auto)completion engines (like [mini.completion](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-completion.md)). See `:h MiniSnippets.start_lsp_server()`.
+- Start specialized in-process LSP server to show loaded snippets inside (auto)completion engines (like [mini.completion](https://nvim-mini.org/mini.nvim/readmes/mini-completion)). See `:h MiniSnippets.start_lsp_server()`.
 
 - Insert, jump, and edit during snippet session in a configurable manner:
     - Configurable mappings for jumping and stopping.
@@ -199,7 +201,7 @@ Snippet session allows interactive editing at tabstop locations:
 
 For more information about snippet session see `:h MiniSnippets-session`.
 
-To select and insert snippets via completion engine (that supports LSP completion; like [mini.completion](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-completion.md) or `:h vim.lsp.completion`), call `:h MiniSnippets.start_lsp_server()` after `require('mini.snippets').setup()`. This sets up an LSP server that matches and provides snippets loaded with 'mini.snippets'. To match with completion engine, use `start_lsp_server({ match = false })`.
+To select and insert snippets via completion engine (that supports LSP completion; like [mini.completion](https://nvim-mini.org/mini.nvim/readmes/mini-completion) or `:h vim.lsp.completion`), call `:h MiniSnippets.start_lsp_server()` after `require('mini.snippets').setup()`. This sets up an LSP server that matches and provides snippets loaded with 'mini.snippets'. To match with completion engine, use `start_lsp_server({ match = false })`.
 
 ### Management
 
@@ -250,7 +252,7 @@ There are two branches to install from:
 Here are code snippets for some common installation methods (use only one):
 
 <details>
-<summary>With <a href="https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-deps.md">mini.deps</a></summary>
+<summary>With <a href="https://nvim-mini.org/mini.nvim/readmes/mini-deps">mini.deps</a></summary>
 
 - 'mini.nvim' library:
 
