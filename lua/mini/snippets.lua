@@ -75,7 +75,7 @@
 ---
 --- You can override runtime config settings locally to buffer inside
 --- `vim.b.minisnippets_config` which should have same structure as
---- `Minisnippets.config`. See |mini.nvim-buffer-local-config| for more details.
+--- `MiniSnippets.config`. See |mini.nvim-buffer-local-config| for more details.
 ---
 --- # Comparisons ~
 ---
