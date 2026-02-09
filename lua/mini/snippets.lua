@@ -1407,6 +1407,7 @@ MiniSnippets.session.stop = function()
     vim.api.nvim_del_augroup_by_name('MiniSnippetsTrack')
     H.unmap_in_sessions()
   end
+  H.clean_sessions()
   H.session_init(H.get_active_session(), false)
 end
 
@@ -1618,17 +1619,8 @@ H.create_autocommands = function()
   au('ColorScheme', '*', H.create_default_hl, 'Ensure colors')
 
   -- Clean up invalid sessions (i.e. which have outdated or corrupted data)
-  local clean_sessions = function()
-    for i = #H.sessions - 1, 1, -1 do
-      if not H.session_is_valid(H.sessions[i]) then
-        H.session_deinit(H.sessions[i], true)
-        table.remove(H.sessions, i)
-      end
-    end
-    if #H.sessions > 0 and not H.session_is_valid(H.get_active_session()) then MiniSnippets.session.stop() end
-  end
   -- - Use `vim.schedule_wrap` to make it work with `:edit` command
-  au('BufUnload', '*', vim.schedule_wrap(clean_sessions), 'Clean sessions stack')
+  au('BufUnload', '*', vim.schedule_wrap(H.clean_sessions), 'Clean sessions stack')
 end
 
 H.create_default_hl = function()
@@ -2205,6 +2197,16 @@ H.track_sessions = function()
   local modechanged_opts = { group = gr, pattern = '*:n', callback = stop_if_final, desc = 'Stop on final tabstop' }
   vim.api.nvim_create_autocmd('ModeChanged', modechanged_opts)
   vim.api.nvim_create_autocmd(text_events, { group = gr, callback = stop_if_final, desc = 'Stop on final tabstop' })
+end
+
+H.clean_sessions = function()
+  for i = #H.sessions - 1, 1, -1 do
+    if not H.session_is_valid(H.sessions[i]) then
+      H.session_deinit(H.sessions[i], true)
+      table.remove(H.sessions, i)
+    end
+  end
+  if #H.sessions > 0 and not H.session_is_valid(H.get_active_session()) then MiniSnippets.session.stop() end
 end
 
 H.map_in_sessions = function()
