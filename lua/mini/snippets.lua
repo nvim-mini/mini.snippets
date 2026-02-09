@@ -1365,7 +1365,6 @@ MiniSnippets.session = {}
 ---        - <is_visited> `(boolean)` - whether tabstop was visited.
 ---        - <next> `(string)` - identifier of the next tabstop.
 ---        - <prev> `(string)` - identifier of the previous tabstop.
----
 MiniSnippets.session.get = function(all) return vim.deepcopy(all and H.sessions or H.get_active_session()) end
 
 --- Jump to next/previous tabstop
