@@ -1626,12 +1626,7 @@ end
 H.create_default_hl = function()
   local hi_link_underdouble = function(to, from)
     local data = vim.api.nvim_get_hl(0, { name = from, link = false })
-    data.default = true
-    data.underdouble, data.underline, data.undercurl, data.underdotted, data.underdashed =
-      true, false, false, false, false
-    data.cterm = { underdouble = true }
-    data.fg, data.bg, data.ctermfg, data.ctermbg = 'NONE', 'NONE', 'NONE', 'NONE'
-    vim.api.nvim_set_hl(0, to, data)
+    vim.api.nvim_set_hl(0, to, { default = true, sp = data.sp, underdouble = true })
   end
   hi_link_underdouble('MiniSnippetsCurrent', 'DiagnosticUnderlineWarn')
   hi_link_underdouble('MiniSnippetsCurrentReplace', 'DiagnosticUnderlineError')
